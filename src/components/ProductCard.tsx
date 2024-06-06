@@ -6,16 +6,17 @@ import {
   Image,
   Text,
   Box,
-  Stack,
+  Button,
 } from "@chakra-ui/react";
 import { Product } from "../hooks/useProducts";
 import RatingScore from "./RatingScore";
 
 interface Props {
   product: Product;
+  addToCart: (product: Product) => void;
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, addToCart }: Props) => {
   return (
     <Card borderRadius={10} overflow="hidden" boxShadow="md">
       <Box
@@ -50,6 +51,9 @@ const ProductCard = ({ product }: Props) => {
           </Text>
           <RatingScore rating={product.rating} />
         </HStack>
+        <Button marginTop={4} onClick={() => addToCart(product)}>
+          Add to Cart
+        </Button>
       </CardBody>
     </Card>
   );

@@ -3,12 +3,13 @@ import useProducts from "../hooks/useProducts";
 import ProductCard from "./ProductCard";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 import { ProductQuery } from "../App";
-
+import { Product } from "../hooks/useProducts";
 interface Props {
   productQuery: ProductQuery;
+  addToCart: (product: Product) => void;
 }
 
-const ProductGrid = ({ productQuery }: Props) => {
+const ProductGrid = ({ productQuery, addToCart }: Props) => {
   const { data, error, isLoading } = useProducts(productQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
@@ -23,7 +24,11 @@ const ProductGrid = ({ productQuery }: Props) => {
         {isLoading &&
           skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)}
         {data.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+          />
         ))}
       </SimpleGrid>
     </>
