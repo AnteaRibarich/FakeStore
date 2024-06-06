@@ -8,12 +8,14 @@ import SortSelector from "./components/SortSelector";
 export interface ProductQuery {
   category: string;
   sortOrder: string;
+  searchText: string;
 }
 
 function App() {
   const [productQuery, setProductQuery] = useState<ProductQuery>({
     category: "all",
     sortOrder: "desc",
+    searchText: "",
   });
 
   return (
@@ -24,16 +26,20 @@ function App() {
       }}
       templateColumns={{
         base: "1fr",
-        lg: "200px 1fr",
+        lg: "250px 1fr",
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={(searchText) =>
+            setProductQuery({ ...productQuery, searchText })
+          }
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <CategoryList
-            seletedCategory={productQuery.category}
+            selectedCategory={productQuery.category}
             onSelectCategory={(category) =>
               setProductQuery({ ...productQuery, category })
             }

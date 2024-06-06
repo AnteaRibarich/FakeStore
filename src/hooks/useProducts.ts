@@ -19,8 +19,12 @@ const useProducts = (productQuery: ProductQuery) => {
   const endpoint = productQuery.category !== "all" ? `/products/category/${productQuery.category}` : "/products";
   const { data, error, isLoading } = useData<Product>(endpoint, {}, [productQuery]);
 
+  const filteredData = data.filter((product) => 
+  product.title.toLowerCase().includes(productQuery.searchText.toLowerCase() || "")
+);
+
   // Sort products by price if sortOrder is specified
-  const sortedData = data.sort((a, b) => {
+  const sortedData = filteredData.sort((a, b) => {
     if (productQuery.sortOrder === "price-asc") {
       return a.price - b.price;
     } else if (productQuery.sortOrder === "price-desc") {

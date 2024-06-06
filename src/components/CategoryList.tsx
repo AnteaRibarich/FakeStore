@@ -1,30 +1,42 @@
 import React from "react";
 import useCategories from "../hooks/useCategories";
-import { Button, List, ListItem, Text } from "@chakra-ui/react";
+import { Button, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 
-interface Props { 
+interface Props {
   onSelectCategory: (category: string) => void;
-  seletedCategory: string
+  selectedCategory: string;
 }
 
-const CategoryList = ({ seletedCategory, onSelectCategory }: Props) => {  
+const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
   const { data: categories, error, isLoading } = useCategories();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (isLoading) return <Spinner />;
+  if (error) return <Text>{error}</Text>;
+
+  const renderCategoryButton = (category: string) => (
+    <Button
+      whiteSpace="normal"
+      textAlign="left"
+      fontWeight={category === selectedCategory ? "bold" : "normal"}
+      onClick={() => onSelectCategory(category)}
+      fontSize="lg"
+      textTransform="capitalize"
+      variant="link"
+    >
+      {category}
+    </Button>
+  );
 
   return (
     <List>
-      <ListItem key='all' paddingY='5px'>
-          <Button fontWeight={'all' === seletedCategory ? 'bold' : 'normal'} onClick={() => onSelectCategory('all')} fontSize='lg' textTransform={'capitalize'} variant='link'>All categories</Button>
+      <ListItem paddingY="5px" key="all">
+        {renderCategoryButton("all")}
       </ListItem>
-
-    {categories.map((category) => (
-      <ListItem key={category} paddingY='5px'>
-          <Button fontWeight={category === seletedCategory ? 'bold' : 'normal'} onClick={() => onSelectCategory(category)} fontSize='lg' textTransform={'capitalize'} variant='link'>{category}</Button>
-      </ListItem>
-    ))}
-    
+      {categories.map((category) => (
+        <ListItem paddingY="5px" key={category}>
+          {renderCategoryButton(category)}
+        </ListItem>
+      ))}
     </List>
   );
 };

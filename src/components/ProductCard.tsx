@@ -34,18 +34,22 @@ const ProductCard = ({ product }: Props) => {
           alt={product.title}
         />
       </Box>
-      <CardBody>
-        <Stack spacing={3}>
+      <CardBody
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
+        <Box flex="1">
           <Heading fontSize="xl" noOfLines={2}>
             {product.title}
           </Heading>
-          <HStack justifyContent="space-between">
-            <Text fontSize="lg" fontWeight="bold">
-              ${product.price}
-            </Text>
-            <RatingScore rating={product.rating} />
-          </HStack>
-        </Stack>
+        </Box>
+        <HStack justifyContent="space-between" marginTop={3}>
+          <Text fontSize="lg" fontWeight="bold">
+            ${product.price}
+          </Text>
+          <RatingScore rating={product.rating} />
+        </HStack>
       </CardBody>
     </Card>
   );
