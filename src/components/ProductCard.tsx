@@ -6,6 +6,7 @@ import {
   Image,
   Text,
   Box,
+  Stack,
 } from "@chakra-ui/react";
 import { Product } from "../hooks/useProducts";
 import RatingScore from "./RatingScore";
@@ -16,28 +17,35 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card borderRadius={10} overflow="hidden" boxShadow="md">
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
-        height="200px" // Set a fixed height for the container
+        height="200px"
+        bg="gray.100"
         overflow="hidden"
       >
         <Image
           src={product.image}
-          width="75%"
-          height="75%"
+          maxWidth="100%"
+          maxHeight="100%"
           objectFit="contain"
           alt={product.title}
         />
       </Box>
       <CardBody>
-        <Heading fontSize="2xl">{product.title}</Heading>
-        <HStack justifyContent="space-between">
-          <Text>cijena</Text>
-          <RatingScore rating={product.rating} />
-        </HStack>
+        <Stack spacing={3}>
+          <Heading fontSize="xl" noOfLines={2}>
+            {product.title}
+          </Heading>
+          <HStack justifyContent="space-between">
+            <Text fontSize="lg" fontWeight="bold">
+              ${product.price}
+            </Text>
+            <RatingScore rating={product.rating} />
+          </HStack>
+        </Stack>
       </CardBody>
     </Card>
   );
