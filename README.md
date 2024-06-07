@@ -20,7 +20,7 @@ This is a dummy store page built with React and Chakra UI and based on Fake Stor
     ```sh
     npm install
     ```
-3. Runn application
+3. Run application
     ```sh
     npm run dev
     ```

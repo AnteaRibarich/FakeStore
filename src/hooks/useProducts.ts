@@ -21,9 +21,8 @@ const useProducts = (productQuery: ProductQuery) => {
 
   const filteredData = data.filter((product) => 
   product.title.toLowerCase().includes(productQuery.searchText.toLowerCase() || "")
-);
+  );
 
-  // Sort products by price if sortOrder is specified
   const sortedData = filteredData.sort((a, b) => {
     if (productQuery.sortOrder === "price-asc") {
       return a.price - b.price;

@@ -68,7 +68,7 @@ function App() {
       <GridItem area="nav" colSpan={2}>
         <NavBar
           onSearch={(searchText) =>
-            setProductQuery({ ...productQuery, searchText })
+            setProductQuery((prevQuery) => ({ ...prevQuery, searchText }))
           }
         />
       </GridItem>
@@ -107,7 +107,7 @@ function App() {
           <CategoryList
             selectedCategory={productQuery.category}
             onSelectCategory={(category) =>
-              setProductQuery({ ...productQuery, category })
+              setProductQuery((prevQuery) => ({ ...prevQuery, category }))
             }
           />
         </GridItem>
@@ -117,7 +117,7 @@ function App() {
           <SortSelector
             sortOrder={productQuery.sortOrder}
             onSelectSortOrder={(sortOrder) =>
-              setProductQuery({ ...productQuery, sortOrder })
+              setProductQuery((prevQuery) => ({ ...prevQuery, sortOrder }))
             }
           />
         </Box>

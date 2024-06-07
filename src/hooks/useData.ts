@@ -4,8 +4,8 @@ import apiClient from "../services/api-client";
 
 const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -19,7 +19,7 @@ const useData = <T>(endpoint: string, requestConfig?: AxiosRequestConfig, deps?:
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;
-        setError(err.message);
+        setError(`Error fetching data: ${err.message}`);
         setLoading(false);
       });
 

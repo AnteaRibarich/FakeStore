@@ -5,6 +5,7 @@ import {
   HStack,
   Image,
   Text,
+  Center,
   Box,
   Button,
 } from "@chakra-ui/react";
@@ -19,14 +20,7 @@ interface Props {
 const ProductCard = ({ product, addToCart }: Props) => {
   return (
     <Card borderRadius={10} overflow="hidden" boxShadow="md">
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="200px"
-        bg="gray.100"
-        overflow="hidden"
-      >
+      <Center height="200px" bg="gray.100">
         <Image
           src={product.image}
           maxWidth="100%"
@@ -34,7 +28,7 @@ const ProductCard = ({ product, addToCart }: Props) => {
           objectFit="contain"
           alt={product.title}
         />
-      </Box>
+      </Center>
       <CardBody
         display="flex"
         flexDirection="column"
